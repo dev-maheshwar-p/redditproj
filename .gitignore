@@ -1,0 +1,15 @@
+/target/
+.classpath
+.project
+.settings/
+log4j-application.log
+chromedriver2.exe
+target/
+SCREENSHOTS/
+.DS_Store
+test-output/*
+*.log
+**/bin/*
+**/.idea/**
+redditproj.iml
+.idea/
