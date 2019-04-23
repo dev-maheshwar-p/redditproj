@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property resource="logback.properties"></property>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M:%L - -->
+                <!--%boldCyan("%msg"%n) %caller{1}-->
+            <!--</pattern>-->
+	<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level | %thread | %logger{1} | %m%n
+        </pattern>
+           <!--  <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger -
+                %boldCyan("%msg"%n) %caller{1}
+            </pattern> -->
+        </encoder>
+    </appender>
+
+    <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/rolling.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--<Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M:%L - "%msg"%n %caller{1}</Pattern>-->
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - "%msg"%n %caller{1}</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archived/log_%d{dd-MM-yyyy}_%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ASYNC-STDOUT-APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>true</includeCallerData>
+        <queueSize>500</queueSize>
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <appender name="ALLOCATION-ORDER-SERVICE-GRAPHITE-LOG-APPENDER"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${LOG_DIR}/allocation_graphite.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yy
+                HH:mm:ss.SSS}\t%X{correlationId}\t%23thread\t%-5level\t%-38logger{36}\t%-25M\t%4line\t%msg%n
+            </Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_DIR}\allocation_graphite.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.walmart" level="INFO" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+    </logger>
+
+    <logger name="org.apache.kafka" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="net.thucydides.core" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.codahale" level="OFF" additivity="false">
+        <appender-ref ref="ALLOCATION-ORDER-SERVICE-GRAPHITE-LOG-APPENDER"/>
+    </logger>
+
+    <root level="${ROOT_LOG_LEVEL}">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <!--<appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="SAVE-TO-FILE"/>
+    </root>
+
+    <!-- this is added to print jdbc queries and named parameters-->
+
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="${ROOT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="com.walmart.move.nim.allocation.rest.HeartBeat" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="net.thucydides.core.reflection.StackTraceAnalyser" level="OFF" additivity="true">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="com.walmart.move.nim.allocation.config.CORSResponseHeaderFilter" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="com.walmart.move.nim.artume.collector" level="OFF" additivity="ON">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+    
+    <logger name="org.springframework.test" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="com.walmart.move.nim.springjmsutils" level="OFF"
+            additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+
+    <logger name="com.walmart.move.nim.springjmsutils" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="*" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="*" level="${LOG_LEVEL}" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+    </logger>
+
+    <logger name="com.mongodb.diagnostics.logging.SLF4JLogger" level="OFF" additivity="false">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+    </logger>
+
+
+</configuration>

@@ -1,20 +1,26 @@
 Feature: Sanity Suite for Reddit
 
-  #precondition:CLEANUP
-  Scenario Outline: Verify that the authorized user is able to login
-    #OMS PO creation
-    Given The user lands on the <reddit-page>.
-    And The user tries to login with the <user-name> and <password> as credentials.
-    Then The user should land on the home page.
+  Background: Verify that the authorized user is able to login.
+    Given The user lands on "https://www.reddit.com/".
+    Then The user tries to login with username "mavdabbler" and password "mavdabblerismavdabbler" as credentials.
 
-    Examples:
-      | reddit-page               | user-name    | password                 |
-      | "https://www.reddit.com/" | "mavdabbler" | "mavdabblerismavdabbler" |
+  Scenario: The User lands on the Reddit home page post login.
+    And The user should land on the home page.
 
-#  @LastScenario
-#  Scenario: Gate out Trailer
-#    When user gates out the Trailer from YMS
-#    And user verifies the load status as "Finalized" and Container status as "Billed" in Loading
-#    And orderTacker has order status "SHIPPED" for those orderTracking lines
-#    Then user verifies the sales details in DCFinancials
-#    And user verifies ASN creation
+  Scenario: Verify that the authorized user is able to view subscribed reddits.
+    And The user verifies that the subscribed subreddits is displayed.
+
+  Scenario: Verify that the user is able to view details of any one of the sub reddits.
+    Given The user verifies he is able to view any random subreddit that is displayed.
+
+  Scenario: Verify that the user is able to view and up vote any one of the random sub reddits.
+    Given The user verifies he is able to view any random subreddit that is displayed.
+    Then The user up votes the post.
+
+  Scenario: Verify that the user is able to view and down vote any one of the random sub reddits.
+    Given The user verifies he is able to view any random subreddit that is displayed.
+    Then The user down votes the post.
+
+  Scenario: Verify that the user is able to comment on any one of the random sub reddits.
+    Given The user verifies he is able to view any random subreddit that is displayed.
+    Then The user provides a comment for the post.

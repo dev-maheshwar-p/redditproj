@@ -1,11 +1,12 @@
 package reddit.glue;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import net.thucydides.core.annotations.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import reddit.scenario.RedditSteps;
+import reddit.steps.RedditSteps;
 import spring.SpringTestConfiguration;
 
 import java.util.HashMap;
@@ -19,23 +20,50 @@ public class RedditGlue {
 	@Autowired
 	ThreadLocal<HashMap<String, Object>> tl;
 
-	@Given("^The user lands on the \"([^\"]*)\"\\.$")
-	public void verifyThatUserLandsOnTheRedditHomePage(String homePageUrl){
-		System.out.println("The home page url is : " + homePageUrl);
+	@Given("^The user lands on \"([^\"]*)\"\\.$")
+	public void verifyThatUserLandsOnThe(String landingPageUrl){
+		redditSteps.navigateToRedditLandingPage();
+	    redditSteps.verifyLandingPage(landingPageUrl);
 	}
 
-	@Given("^The user tries to login with the \"([^\"]*)\" and \"([^\"]*)\" as credentials\\.$")
+	@Given("^The user tries to login with username \"([^\"]*)\" and password \"([^\"]*)\" as credentials\\.$")
 	public void userTriesToLogin(String userName, String password) {
-		System.out.println("The user name is : " + userName + " and the password is : " + password);
+		redditSteps.loginUsingCredentials(userName, password);
 	}
 
 	@Then("^The user should land on the home page\\.$")
 	public void verifyThatTheUserLandsOnTheHomePage(){
-		System.out.println("In the verification of the home page");
-		tl.get().put("tl","****************** tl *************");
-
-		redditSteps.printThreadLocalValues();
-
+		redditSteps.navigateToRedditLandingPage();
 	}
 
+	@Then("^The user verifies that the subscribed subreddits is displayed\\.$")
+	public void verifyThatTheUsersListOfSubscribedRedditsIsDisplayed(){
+		redditSteps.clickSubscriptionFilterButton();
+		redditSteps.verifyCommunitiesSectionsHasExpectedSubReddit();
+	}
+
+	@Then("^The user verifies he is able to view any random subreddit that is displayed\\.$")
+	public void verifyViewingRandomSubReddit(){
+		redditSteps.verifyAccessToRandomSubReddit();
+	}
+
+	@Then("^The user provides a comment for the post\\.$")
+	public void provideCommentForPost(){
+		redditSteps.provideComment();
+	}
+
+	@Then("^The user up votes the post\\.$")
+	public void userUpVotesPost(){
+		redditSteps.upVotePost();
+	}
+
+	@Then("^The user down votes the post\\.$")
+	public void userDownVotesPost(){
+		redditSteps.downVotePost();
+	}
+
+	@After
+	public void logOut(){
+		redditSteps.logOut();
+	}
 }

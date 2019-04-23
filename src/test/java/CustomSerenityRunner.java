@@ -19,13 +19,8 @@ public class CustomSerenityRunner extends CucumberWithSerenity {
     public CustomSerenityRunner(Class clazz) throws InitializationError, IOException {
         super(clazz);
 
-        String programName = System.getProperty("PROGRAM");
-        String env=  System.getProperty("ENV");
-
-        String profile = "e2e";
-
+        String profile = System.getProperty("project");
         System.setProperty("log4j.configurationClass","CustomConfigurationFactory");
-
         System.setProperty("spring.profiles.active", profile);
 
     }
