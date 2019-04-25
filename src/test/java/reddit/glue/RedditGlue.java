@@ -26,9 +26,9 @@ public class RedditGlue {
 	    redditSteps.verifyLandingPage(landingPageUrl);
 	}
 
-	@Given("^The user tries to login with username \"([^\"]*)\" and password \"([^\"]*)\" as credentials\\.$")
-	public void userTriesToLogin(String userName, String password) {
-		redditSteps.loginUsingCredentials(userName, password);
+	@Given("^The user tries to login with credentials for the user \"([^\"]*)\"\\.$")
+	public void userTriesToLoginWithUserCredentials(String userName) {
+		redditSteps.loginUsingCredentialsOfUser(userName);
 	}
 
 	@Then("^The user should land on the home page\\.$")

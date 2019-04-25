@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property resource="logback.properties"></property>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M:%L -
+                %boldCyan("%msg"%n) %caller{1}
+            </pattern>
+            <!-- Optional: Enable below line & comment above line for basic logging without much formating -->
+            <!--<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level | %thread | %logger{1} | %m%n</pattern>-->
+        </encoder>
+    </appender>
+
+    <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/rolling.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--<Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M:%L - "%msg"%n %caller{1}</Pattern>-->
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - "%msg"%n %caller{1}</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archived/log_%d{dd-MM-yyyy}_%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ASYNC-STDOUT-APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>true</includeCallerData>
+        <queueSize>500</queueSize>
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <logger name="net.thucydides.core" level="OFF" additivity="true">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="ch.qos.logback" level="OFF" additivity="true">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework" level="OFF" additivity="true">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="${ROOT_LOG_LEVEL}">
+        <appender-ref ref="ASYNC-STDOUT-APPENDER"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+    </root>
+
+    <logger name="*" level="${LOG_LEVEL}" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+    </logger>
+</configuration>

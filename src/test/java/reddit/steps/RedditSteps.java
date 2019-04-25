@@ -39,7 +39,9 @@ public class RedditSteps extends ScenarioSteps {
 		redditLandingPage.open();
 	}
 
-	public void loginUsingCredentials(String userName, String password) {
+	public void loginUsingCredentialsOfUser(String userName) {
+
+		String password = environment.getProperty(userName + "_password");
 
 		redditLandingPage.clickOnLoginButton();
 		redditLandingPage.switchToCredentialsFrame();

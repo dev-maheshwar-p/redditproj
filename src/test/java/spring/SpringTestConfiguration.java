@@ -13,14 +13,14 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @EnableRetry
-@PropertySource(value = {"classpath:${project}/reddit.properties"})
+@PropertySource(value = {"classpath:${project}/app.properties"})
 public class SpringTestConfiguration {
 
     static final Logger logger = LoggerFactory.getLogger(SpringTestConfiguration.class);
 
     @Configuration
     @Profile("Reddit")
-    @PropertySource(value = {"classpath:${project}/reddit.properties"})
+    @PropertySource(value = {"classpath:${project}/${env}/reddit.properties"})
     public static class E2eAppConfig {
 
         @Autowired
