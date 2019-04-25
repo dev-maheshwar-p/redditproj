@@ -37,7 +37,7 @@ public class RedditHomePage extends PageObject {
 	@FindBy(xpath = "//button[@aria-label='Start typing to filter your communities or use up and down to select.']")
 	private WebElement filterCommunitiesButton;
 
-	@FindBy(xpath = "//div[contains(@class,'scroller') and not(contains(*,'promoted'))]")
+	@FindBy(xpath = "//div[contains(@class,'scroller') and not(contains(*,'promoted'))]//child::*[@data-click-id='body']/div/span/a")
 	private List<WebElement> listOfSubRedditsThatAreNotPromotions;
 
 	@FindBy( xpath = "//div[@role='textbox']")

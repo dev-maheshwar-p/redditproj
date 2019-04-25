@@ -19,7 +19,7 @@ public class SpringTestConfiguration {
     static final Logger logger = LoggerFactory.getLogger(SpringTestConfiguration.class);
 
     @Configuration
-    @Profile("Reddit")
+    @Profile("reddit")
     @PropertySource(value = {"classpath:${project}/${env}/reddit.properties"})
     public static class E2eAppConfig {
 

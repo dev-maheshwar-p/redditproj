@@ -1,3 +1,4 @@
+package reddit.test;
 
 import cucumber.runtime.junit.FeatureRunner;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
