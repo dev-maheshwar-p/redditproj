@@ -7,7 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import reddit.pages.RedditHomePage;
 import reddit.pages.RedditLandingPage;
-import spring.SpringTestConfiguration;
+import framework.spring.SpringTestConfiguration;
 import java.util.HashMap;
 
 @ContextConfiguration(classes = SpringTestConfiguration.class)

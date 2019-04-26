@@ -1,4 +1,4 @@
-package reddit.test;
+package framework.baserunner;
 
 import cucumber.runtime.junit.FeatureRunner;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
@@ -7,7 +7,7 @@ import org.junit.runners.model.InitializationError;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
-import spring.SpringTestConfiguration;
+import framework.spring.SpringTestConfiguration;
 
 import java.io.IOException;
 import java.util.Iterator;

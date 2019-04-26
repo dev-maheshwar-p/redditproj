@@ -1,10 +1,11 @@
-package reddit.test;
+package reddit.runner;
 
 import cucumber.api.CucumberOptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import reddit.constants.FeatureFileNames;
+import framework.baserunner.CustomSerenityRunner;
 
 @RunWith(CustomSerenityRunner.class)
 @CucumberOptions(features = {

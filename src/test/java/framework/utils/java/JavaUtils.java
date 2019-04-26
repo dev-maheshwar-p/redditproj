@@ -1,4 +1,4 @@
-package reddit;
+package framework.utils.java;
 
 import net.jodah.failsafe.RetryPolicy;
 

@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import reddit.steps.RedditSteps;
-import spring.SpringTestConfiguration;
+import framework.spring.SpringTestConfiguration;
 
 import java.util.HashMap;
 

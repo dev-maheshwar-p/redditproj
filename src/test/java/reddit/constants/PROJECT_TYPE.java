@@ -1,8 +1,8 @@
-package framework.constants;
+package reddit.constants;
 
 public enum PROJECT_TYPE {
 
-    REDDIT("REDDIT"),AMAZON("AMAZON");
+    REDDIT("REDDIT"), AMAZON("AMAZON");
 
     String projectType;
 

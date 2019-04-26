@@ -1,4 +1,4 @@
-package reddit;
+package framework.serenity;
 
 import net.thucydides.core.webdriver.DriverSource;
 import org.apache.logging.log4j.LogManager;

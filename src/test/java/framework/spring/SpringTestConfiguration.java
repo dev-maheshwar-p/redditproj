@@ -1,4 +1,4 @@
-package spring;
+package framework.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +13,14 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @EnableRetry
-@PropertySource(value = {"classpath:${project}/app.properties"})
+@PropertySource(value = {"classpath:${project}/properties/app.properties"})
 public class SpringTestConfiguration {
 
     static final Logger logger = LoggerFactory.getLogger(SpringTestConfiguration.class);
 
     @Configuration
     @Profile("reddit")
-    @PropertySource(value = {"classpath:${project}/${env}/reddit.properties"})
+    @PropertySource(value = {"classpath:${project}/properties/${env}/reddit.properties"})
     public static class E2eAppConfig {
 
         @Autowired
