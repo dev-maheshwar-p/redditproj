@@ -23,6 +23,14 @@ import javax.jms.JMSException;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
+
+/*
+
+    1. All the required beans for autowiring are in this class.
+    2. Provides support to dynamically configure the required environment based on project and environment.
+
+ */
+
 @SpringBootApplication
 @EnableRetry
 @PropertySource(value = {"classpath:${project}/properties/app.properties"})
