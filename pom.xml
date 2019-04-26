@@ -35,10 +35,11 @@
             <version>2.0.48</version>
         </dependency>
 
+
+        <!-- The exclusions were used to allow log4j2 as the logging framework; uncomment as needed -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <!--<version>2.1.0.RELEASE</version> -->
             <version>2.0.4.RELEASE</version>
             <!--<exclusions> -->
             <!--<exclusion> -->
@@ -47,10 +48,10 @@
             <!--</exclusion> -->
             <!--</exclusions> -->
         </dependency>
+        <!-- The exclusions were used to allow log4j2 as the logging framework; uncomment as needed -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--<version>2.1.0.RELEASE</version> -->
             <version>2.0.4.RELEASE</version>
             <!--<exclusions> -->
             <!--<exclusion> -->
@@ -72,12 +73,6 @@
             <version>3.6.0</version>
         </dependency>
 
-
-        <!--<dependency> -->
-        <!--<groupId>org.springframework</groupId> -->
-        <!--<artifactId>spring-test</artifactId> -->
-        <!--<version>5.0.4.RELEASE</version> -->
-        <!--</dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
@@ -98,13 +93,8 @@
             <version>5.0.4.RELEASE</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency> -->
-        <!--<groupId>com.google.guava</groupId> -->
-        <!--<artifactId>guava</artifactId> -->
-        <!--<version>17.0</version> -->
-        <!--</dependency> -->
 
-
+        <!-- Allowed for compatibility with log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -115,7 +105,7 @@
             <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
@@ -169,11 +159,7 @@
             <artifactId>groovy-all</artifactId>
             <version>1.8.6</version>
         </dependency>
-        <!--<dependency> -->
-        <!--<groupId>junit</groupId> -->
-        <!--<artifactId>junit</artifactId> -->
-        <!--<version>4.12</version> -->
-        <!--</dependency> -->
+        
         <dependency>
             <groupId>com.googlecode.lambdaj</groupId>
             <artifactId>lambdaj</artifactId>

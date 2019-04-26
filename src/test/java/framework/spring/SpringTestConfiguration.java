@@ -21,7 +21,7 @@ public class SpringTestConfiguration {
     @Configuration
     @Profile("reddit")
     @PropertySource(value = {"classpath:${project}/properties/${env}/reddit.properties"})
-    public static class E2eAppConfig {
+    public static class RedditConfig {
 
         @Autowired
         Environment environment;
