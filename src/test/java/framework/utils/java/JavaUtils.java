@@ -1,6 +1,10 @@
 package framework.utils.java;
 
+import framework.spring.SpringTestConfiguration;
 import net.jodah.failsafe.RetryPolicy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,20 +12,20 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+
+@ContextConfiguration(classes = SpringTestConfiguration.class)
 public class JavaUtils {
 
-    private Random rnd = new Random();
-
-    public int randonNumberGenerator(int noOfDigits) {
-        int m = (int) Math.pow(10, (noOfDigits - 1));
-        return m + rnd.nextInt(9 * m);
-
-    }
+    @Autowired
+    Environment environment;
 
 	public String getUUID() {
 		return UUID.randomUUID().toString();
 	}
 
+    public String getProperty(String propertyName){
+	    return environment.getProperty(propertyName);
+    }
 
     public String getCurrentDateAndTime(String format, String timeZone) {
         DateFormat dateFormat = new SimpleDateFormat(format);
@@ -37,11 +41,6 @@ public class JavaUtils {
         Date date = new Date();
         return dateFormat.format(date);
     }
-
-    public String getCurrentDateAndTime() {
-        return getCurrentDateAndTime("yyyy-MM-dd HH:mm:ss");
-    }
-
 
     public static RetryPolicy getRetryPolicy(TimeUnit timeUnit, long delay, int retryCount) {
 
@@ -93,20 +92,5 @@ public class JavaUtils {
                                 (e1, e2) -> e1, LinkedHashMap::new));
 
     }
-
-    /*
-     * This method returns a random number from the specified range
-     */
-    public int randomNrGeneratorRange(int min, int max) {
-
-        return rnd.nextInt((max - min) + 1) + min;
-
-    }
-    public String format(String text, String... val2) {
-		for (int occurence = 0; occurence < val2.length; occurence++) {
-			text = text.replace("#" + occurence + "#", val2[occurence]);
-		}
-		return text;
-	}
 
 }

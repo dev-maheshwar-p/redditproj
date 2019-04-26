@@ -159,7 +159,7 @@
             <artifactId>groovy-all</artifactId>
             <version>1.8.6</version>
         </dependency>
-        
+
         <dependency>
             <groupId>com.googlecode.lambdaj</groupId>
             <artifactId>lambdaj</artifactId>
@@ -290,6 +290,14 @@
             <version>6.1.0.jre8</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.ibm.mq/com.ibm.mq.allclient -->
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>com.ibm.mq.allclient</artifactId>
+            <version>9.1.2.0</version>
+        </dependency>
+
 
     </dependencies>
 
