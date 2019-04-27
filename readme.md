@@ -26,7 +26,8 @@ This project serves as a sanity suite intended to demonstrate a test framework b
     * JDBC - Uses Spring "JdbcTemplate" as a simple alternative to JDBC's painful syntax.
 5. CustomDriver.java - This class is used to customize/override the default behaviour of the Chrome Driver instance instantiated by Serenity. Example: Execution in headless mode. 
 6. CustomSerenityRunner.java - This is a custom serenity runner that extends CucumberWithSerenity that is used to take advantage of some of the life-cycle methods of Serenity.
-7. Project Structure: In alignment with project/env. Example: Only properties files locations are ${env} [environment] specific as these provide configuration input like hitting a mock vs actual EP based on env. 
+7. Project Structure: In alignment with project/env. Example: Only properties files locations are ${env} [environment] specific as these provide configuration input like hitting a mock vs actual EP based on env.
+8. Rolling & archived logs. 
 
 ####Things that were not implemented yet but were intended to be show cased as part of this project, in its current state.
 
