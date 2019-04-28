@@ -2,7 +2,7 @@ Feature: Sanity Suite for Reddit
 
   Background: Verify that the authorized user is able to login.
     Given The user lands on "https://www.reddit.com/".
-    Then The user tries to login with credentials for the user "".
+    Then The user tries to login with credentials for the user "user".
 
   Scenario: The User lands on the Reddit home page post login.
     And The user should land on the home page.
